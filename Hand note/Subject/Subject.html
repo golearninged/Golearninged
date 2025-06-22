@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Notes - Go Learning</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #5D5FEF;
+            --secondary-color: #4F46E5;
+            --button-color: #3A36DB;
+            --button-hover: #2E2BB7;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --white: #FFFFFF;
+        }
+        
+        body {
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        /* Back to Home Button */
+        .back-btn {
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        /* Subjects Grid */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        
+        /* Animated Blue Button */
+        .subject-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            background-color: var(--button-color);
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 4px 15px rgba(58, 54, 219, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        /* Border Animation */
+        .subject-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                #3A36DB, #5D5FEF, #4F46E5, #3A36DB);
+            background-size: 400%;
+            border-radius: 10px;
+            z-index: -1;
+            animation: borderAnimation 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .subject-btn:hover::before {
+            opacity: 1;
+        }
+        
+        @keyframes borderAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Button Hover Effects */
+        .subject-btn:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(58, 54, 219, 0.4);
+        }
+        
+        /* Ripple Effect */
+        .subject-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .subject-btn:hover::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        /* Footer Message */
+        .footer-message {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .subject-btn {
+                height: 70px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Go Learning</h1>
+                </div>
+                <a href="index.html" class="back-btn">Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>Hand Notes</h1>
+                <p>নোটস পেতে সাব্জেক্ট সিলেক্ট করো</p>
+            </section>
+            
+            <!-- Subjects Grid -->
+            <div class="subjects-grid">
+                <a href="math-notes.html" class="subject-btn">Mathematics</a>
+                <a href="physics-notes.html" class="subject-btn">Physics</a>
+                <a href="chemistry-notes.html" class="subject-btn">Chemistry</a>
+                <a href="biology-notes.html" class="subject-btn">Biology</a>
+                <a href="higher-math-notes.html" class="subject-btn">Higher Mathematics</a>
+                
+            </div>
+            
+            <!-- Footer Message -->
+            <div class="footer-message">
+                তোমরা চাইলে নোটস ডাউনলোড করতে পারো
+            </div>
+        </div>
+    </main>
+</body>
+</html>
